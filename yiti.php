@@ -15494,6 +15494,7 @@ echo <<<TTTT
 TTTT;
 	exit();
 }
+$_GET['cc'] = trim($_GET['cc']);
 if(strlen($_GET['cc'])<3)
 {
 	echo "<script>ff.cc.value='".$_GET['cc']."'</script>";
