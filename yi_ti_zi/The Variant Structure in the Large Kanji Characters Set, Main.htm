@@ -1,0 +1,1588 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0051)http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/main.htm -->
+<HTML><HEAD><TITLE>The Variant Structure in the Large Kanji Characters Set, Main</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=shift_jis">
+<STYLE type=text/css>UL.without {
+	MARGIN-LEFT: 0.2em; LIST-STYLE-TYPE: none
+}
+OL.without {
+	MARGIN-LEFT: 0.2em; LIST-STYLE-TYPE: none
+}
+UL {
+	MARGIN-LEFT: 1.5em
+}
+</STYLE>
+
+<META content="MSHTML 6.00.2900.5512" name=GENERATOR></HEAD>
+<BODY><FONT face="ＭＳ 明朝"><!--(原案改訂2007-04-17)-->
+<CENTER>
+<H3>情報処理学会&nbsp;試行標準&nbsp;IPSJ-TS 0008:2007</H3></CENTER><BR>
+<CENTER>
+<H1>大規模漢字集合の異体字構造</H1>
+<H2>The Variant Structure in the Large Kanji Characters 
+Set</H2></CENTER><BR><BR>
+<H3><A name=0.>序文</A></H3>
+<P>この学会試行標準(IPSJ-TS)は，漢字を扱う研究機関及び教育機関における異体字を考慮した情報処理を可能にすることを目的として，<B>ISO/IEC 
+10646</B>:2003国際符号化文字集合に収録される漢字集合に含まれる多くの異体字関係を，その種類及び特徴に応じて構造的に表現するための新たな調査研究を行い，定めたものである。 
+</P><BR>
+<H3><A name=1.>1. 適用範囲</A></H3>
+<P>この学会試行標準は，学会試行標準として発表された符号化文字基本集合(IPSJ-TS 0005:2002)及び符号化文字基本集合 - 
+日本コア漢字(IPSJ-TS 0007:2004)を中心に，<B>ISO/IEC 
+10646</B>などの大規模な文字集合における異体字を関係付けるために，異体字の対応関係を整理して個々に関係テーブルを作成し，それに基づいて異体字関係を構造化する。“代表字”，“異体字（常用，非常用）”の概念を明確化し，さらに大きな符号化文字集合の取り扱いに応用可能にするために枠組みを作成する。 
+</P><BR>
+<H3><A name=2.>2. 引用規定</A></H3>
+<P>次に示す規格は，この学会試行標準に引用されることによって，この規定の一部を構成する。 </P>
+<P><B>ISO/IEC 10646</B>:2003 Information technology - Universal Multiple-Octet 
+Coded Character Set (UCS) 
+<P><B>備考</B> <B>JIS X 0221</B> (現在改正策定中)が，この国際規格に対応している。 
+<P><B>備考</B> この学会試行標準における<B>ISO/IEC 10646</B>:2003という記述は，<B>ISO/IEC 
+10646</B>:2003/<B>Amd.1</B>:2005及び<B>ISO/IEC 
+10646</B>:2003/<B>Amd.2</B>:2006を含む。 </P><BR>
+<H3><A name=3.>3. 定義</A></H3>
+<H4>3.1 異体字 (Kanji variants)</H4>
+<P>ある漢字に対して関係をもつ，異なる符号位置をもつ漢字を異体字と呼ぶ。関係には次の3種類がある。 
+<UL class=without>
+  <LI>a) 同音，同義，同形で符号位置の異なる漢字 
+  <LI>b) 同音，同義で字形の異なる漢字 
+  <LI>c) 同音で意味及び字形が異なるが，場合によって同義として代替される漢字 </LI></UL>
+<P></P>
+<H4>3.2 異体字関係 (relation among Kanji variants)</H4>
+<P>異体字の種類を示す。ある漢字とある漢字が，複数の異なる異体字関係をもつこともある。 </P>
+<H4>3.3 通仮字 (replaced character with the same pronounciation)</H4>
+<P>古典文献において同音別義である漢字の音を借りて表記した文字。 </P>
+<H4>3.4 代表字 (representative character)，別字形 (alternative character shape)</H4>
+<P>ある言語環境で，標準的に使われるものを代表字と呼び，その他のものを別字形と呼ぶ。この関係は，固定的なものではなく，ある国，地域で代表字であるものが，他の国，地域では別字形として扱われることも多い。 
+</P>
+<H4>3.5 見出し字 (entry character)</H4>
+<P>表において，一番左に配置される漢字。表ではすべての符号位置を見出し字とし，符号順に配列することによって，調べたい漢字の符号位置から目的の情報を得ることができる。 
+</P><BR>
+<H3><A name=4.>4. 異体字関係の選定</A></H3>
+<P>異体字関係の選定は，次の手順による。 </P>
+<H4><A name=4.1>4.1 対象となる漢字符号位置</A></H4>
+<P><B>ISO/IEC 10646</B>:2003におけるCJK統合漢字ブロック(CJK Unified 
+Ideographs)のすべての符号位置，及びCJK互換漢字ブロックの中で日本国内の規格との対応関係をもつ符号位置の集合を対象とする。具体的な符号位置を<B>表4.1</B>に示す。CJK統合漢字に含まれる“漢文用記号(KANBUN)”ブロックについては対象としない。 
+
+<P>
+<TABLE align=center border=1>
+  <CAPTION><B>表4.1 対象となる符号位置集合</B> </CAPTION>
+  <TBODY>
+  <TR>
+    <TH>開始UCS符号位置
+    <TH>終了UCS符号位置
+    <TH>符号数
+    <TH>ブロック名称 
+  <TR>
+    <TD>U+4E00
+    <TD>U+9FA5
+    <TD>20902
+    <TD>CJK Unified Ideographs 
+  <TR>
+    <TD>U+3400 
+    <TD>U+4DB5 
+    <TD>6582 
+    <TD>CJK Unified Ideographs Extension A 
+  <TR>
+    <TD>U+20000 
+    <TD>U+2A6D6 
+    <TD>42711 
+    <TD>CJK Unified Ideographs Extension B 
+  <TR>
+    <TD>U+F900 
+    <TD>U+FA0B 
+    <TD>9 
+    <TD>CJK Compatibility Ideographs※1 
+  <TR>
+    <TD>U+FA0E 
+    <TD>U+FA2D 
+    <TD>32 
+    <TD>CJK Compatibility Ideographs※2 
+  <TR>
+    <TD>U+FA30 
+    <TD>U+FA6A 
+    <TD>59 
+    <TD>CJK Compatibility Ideographs </TD></TR></TBODY></TABLE></P>
+<BLOCKQUOTE>
+  <BLOCKQUOTE>
+    <P>※1 この領域は基本的に<B>KS C 5601</B>-1987との互換のための符号であるが，その内<B>JIS X 
+    0213</B>:2004において<B>ISO/IEC 10646</B>:2003との対応関係が規定されている9符号位置を対象とする。 
+    <P>※2 内12符号位置は，実際にはCJK Unified Ideographs-2001として規定されている。 
+</P></BLOCKQUOTE></BLOCKQUOTE>
+<H4><A name=4.2>4.2 異体字関係の選定に用いた資料</A></H4>
+<P>異体字関係の選定に用いた16種類の資料を<B>表4.2</B>に示す。 
+<P>
+<TABLE align=center border=1>
+  <CAPTION><B>表4.2 異体字関係選定資料</B> </CAPTION>
+  <TBODY>
+  <TR>
+    <TH>番号
+    <TH>資料名 
+  <TR>
+    <TD>[1]
+    <TD><B>JIS X 0208</B>:1997及びJIS漢字字典（日本規格協会, 1997年） 
+  <TR>
+    <TD>[2]
+    <TD><B>JIS X 0212</B>:1995 
+  <TR>
+    <TD>[3]
+    <TD><B>JIS X 0213</B>:2004 
+  <TR>
+    <TD>[4]
+    <TD><B>ISO/IEC 10646</B>:2003 
+  <TR>
+    <TD>[5]
+    <TD>常用漢字表（1986年） 
+  <TR>
+    <TD>[6]
+    <TD>第32回国語審議会総会報告（1956年） 
+  <TR>
+    <TD>[7]
+    <TD>戸籍法施行規則別表第二の一（2004年） 
+  <TR>
+    <TD>[8]
+    <TD>法務省令商業登記規則（1964年） 
+  <TR>
+    <TD>[9]
+    <TD>第一批異体字整理表（1997年） 
+  <TR>
+    <TD>[10]
+    <TD>漢語新辞典（大修館書店, 2001年） 
+  <TR>
+    <TD>[11]
+    <TD>漢辞海（三省堂, 2006年） 
+  <TR>
+    <TD>[12]
+    <TD>新字源（角川書店, 1987年） 
+  <TR>
+    <TD>[13]
+    <TD>ユニコード漢字情報辞典（三省堂, 2000年） 
+  <TR>
+    <TD>[14]
+    <TD>漢語大字典（四川辞書出版社・湖北辞書出版社, 1986年） 
+  <TR>
+    <TD>[15]
+    <TD>Adobe社Adobe-GB1-4文字集合準拠フォント内GSUBテーブル情報 
+  <TR>
+    <TD>[16]
+    <TD>Unicodeコンソーシアムunihan.txt </TD></TR></TBODY></TABLE></P>
+<H4><A name=4.3>4.3 異体字関係の選定</A></H4>
+<P><B>表4.2</B>の資料をもとに，14種類の異体字関係を選定した（<B>表4.3</B>）。 
+<P>
+<TABLE align=center border=1>
+  <CAPTION><B>表4.3 異体字関係一覧</B> </CAPTION>
+  <TBODY>
+  <TR>
+    <TH>番号
+    <TH>名称
+    <TH>参考資料（表4.2における番号） 
+  <TR>
+    <TD>[1]
+    <TD><B>JIS X 0208</B>規格 1983年改正に伴う新旧字
+    <TD>1 
+  <TR>
+    <TD>[2]
+    <TD>JIS国内規格 参照異体字
+    <TD>1, 2, 3 
+  <TR>
+    <TD>[3]
+    <TD><B>ISO/IEC 10646-1</B>原規格分離漢字
+    <TD>4 
+  <TR>
+    <TD>[4]
+    <TD>CJK互換漢字 韓国KS互換
+    <TD>4 
+  <TR>
+    <TD>[5]
+    <TD>CJK互換漢字 IBM拡張文字及びマイクロソフトWindows CP932互換
+    <TD>4 
+  <TR>
+    <TD>[6]
+    <TD>常用漢字新旧字
+    <TD>5 
+  <TR>
+    <TD>[7]
+    <TD>同音書き換え
+    <TD>6 
+  <TR>
+    <TD>[8]
+    <TD>人名用漢字同一字種
+    <TD>7 
+  <TR>
+    <TD>[9]
+    <TD>漢数字と大字
+    <TD>8, 10, 11, 12 
+  <TR>
+    <TD>[10]
+    <TD>第一批異体字整理表
+    <TD>9 
+  <TR>
+    <TD>[11]
+    <TD>漢語大字典異体字表
+    <TD>10 
+  <TR>
+    <TD>[12]
+    <TD>漢語大字典通仮字表
+    <TD>10 
+  <TR>
+    <TD>[13]
+    <TD>中国簡体字と繁体字
+    <TD>13, 15, 16 
+  <TR>
+    <TD>[14]
+    <TD>日本と中国の常用字における異なり字形
+    <TD>13 </TD></TR></TBODY></TABLE></P><BR>
+<H3><A name=5.>5. 異体字関係表の作成</A></H3>
+<P>異体字関係表は，関係表A及び関係表Bの2種類を作成した。 </P>
+<H4><A name=5.1>5.1 関係表A</A></H4>
+<P>ある漢字符号位置に対して異体字関係をもつ複数の異体字符号位置の集合が存在するときに，それぞれの漢字符号位置がどのような関係であるかを区別するために，14種類の異体字関係を6グループに分類し（<B>表5.1</B>），それぞれのグループにおける異体字関係を関係表として作成した。 
+
+<P>
+<TABLE align=center border=1>
+  <CAPTION><B>表5.1 異体字グループ</B> </CAPTION>
+  <TBODY>
+  <TR>
+    <TH>グループ名称（短縮表記）
+    <TH>含まれる異体字関係（表4.3の番号） 
+  <TR>
+    <TD>日本異体字（日本）
+    <TD>1, 2, 6, 8 
+  <TR>
+    <TD>中国異体字（中国）
+    <TD>10, 13 
+  <TR>
+    <TD>日中字形差（日中）
+    <TD>14 
+  <TR>
+    <TD>文字コード由来（文字コード）&nbsp;
+    <TD>3, 4, 5 
+  <TR>
+    <TD>同音異義字（音通用）
+    <TD>7, 12 
+  <TR>
+    <TD>その他
+    <TD>9, 11 </TD></TR></TBODY></TABLE></P>
+<H4><A name=5.2>5.2 関係表B</A></H4>
+<P>ある漢字符号位置に対して異体字関係をもつ漢字符号位置をその異体字関係名称とともに列挙した。 </P>
+<H4><A name=5.3>5.3 異体字関係の連鎖</A></H4>
+<P>ある漢字符号位置についての異体字集合を導く際，異体字関係をもつ符号位置がさらに別の符号位置と異体字関係をもつ場合は，連鎖的に関係するすべての符号位置をその集合とした（異体字関係の連鎖）。ただし，同音異義による特殊な異体字関係（関係7, 
+12），漢語大字典異体字表だけに掲載される異体字関係，及び漢数字と大字との異体字関係については，集合が大きくなりすぎるため，連鎖の対象としなかった。 </P>
+<H4><A name=5.4>5.4 特別な異体字</A></H4>
+<P>異体字関係のうち，関係7, 9, 12については用途が限定される特殊な異体字であるため，見出し字に対しての異体字のみを異体字集合に含めるものとした。 
+</P>
+<H4><A name=5.5>5.5 ISO/IEC 10646:2003における5欄表記の字形選択</A></H4>
+<P>異体字関係選定資料の字形と<B>ISO/IEC 
+10646</B>:2003の符号位置とを同定する際，各資料の作成国・地域を元に5欄表記の中から字形を選択した。例えば日本の資料であれば，J欄の字形を同定の対象とした。 
+</P><BR>
+<H3><A name=6.>6. 文字の配列</A></H3>
+<H4><A name=6.1>6.1 見出し字と異体字</A></H4>
+<P>各関係表は，<B>ISO/IEC 10646</B>:2003のCJK統合漢字全20,902符号位置を見出し字として配列し，異体字をその右に列挙している。 
+</P>
+<H4><A name=6.2>6.2 同符号位置内に存在する複数の字形</A></H4>
+<P>各関係表見出し字の欄には，<B>ISO/IEC 
+10646</B>:2003の各符号位置のCTJKVによる5欄表記において，字形の差異が大きいものについては，それらをすべて併記した。差異の判断にはIPSJ-TS 
+0005:2002において区別されているかに拠った。 </P>
+<H4><A name=6.3>6.3 関係表に使用したフォント</A></H4>
+<P>関係表の作成は，Microsoft Windows 
+Vistaに標準で付属するフォントを使用した（<B>表6.1</B>）。これらのフォントの使用優先順位を次に示す。 
+<UL class=without>
+  <LI>a) MS明朝にグリフがあればそれを用いる。 
+  <LI>b) MS明朝にグリフが無く，その字が漢語大字典掲載字である場合はSimSunを用いる。 
+  <LI>c) MS明朝にグリフが無く，その字が漢語大字典未掲載字である場合は，Batang，MingLiU，SimSunの順にグリフがあるフォントを用いる。 
+  </LI></UL>
+<P>
+<TABLE align=center border=1>
+  <CAPTION><B>表6.1 関係表に使用したフォント</B> </CAPTION>
+  <TBODY>
+  <TR>
+    <TH>名称
+    <TH>備考 
+  <TR>
+    <TD>MS明朝
+    <TD>日本用&nbsp;&nbsp; 
+  <TR>
+    <TD>SimSun及びSimSun-ExtB
+    <TD>中国用 
+  <TR>
+    <TD>MingLiU及びMingLiU-ExtB&nbsp;&nbsp;
+    <TD>台湾用 
+  <TR>
+    <TD>Batang
+    <TD>韓国用 </TD></TR></TBODY></TABLE></P><BR>
+<H3><A name=7.>7. 関係表凡例</A></H3>
+<H4><A name=7.1>7.1 関係表A</A></H4>
+<P align=center><B>表7.1 関係表A</B><BR><IMG 
+src="The Variant Structure in the Large Kanji Characters Set, Main.files/fig_7_1.jpg"> 
+</P>
+<P>
+<UL class=without>
+  <LI>① 分類グループの名称。 
+  <LI>② 見出し字の符号位置。関係表Bの同符号位置へのリンクとなっている。 
+  <LI>③ 枠でくくられた集合が，それぞれ異体字関係をもつ。集合内の文字の並び順には，意味をもつものともたないものとが混在する。 
+  <LI>④ その他異体字関係のある漢字が列挙される。 </LI></UL>
+<P></P>
+<H4><A name=7.2>7.2 関係表B</A></H4>
+<P align=center><B>表7.2 関係表B</B><BR><IMG 
+src="The Variant Structure in the Large Kanji Characters Set, Main.files/fig_7_2.jpg">&nbsp;<IMG 
+src="The Variant Structure in the Large Kanji Characters Set, Main.files/fig_7_3.jpg"> 
+</P>
+<P>
+<UL class=without>
+  <LI>① 見出し字。 
+  <LI>② 符号位置。該当データへのリンクとなっている。 
+  <LI>③ 同符号位置に大きな差異のある字形がある場合に列挙する。 
+  <LI>④ 異体字関係をもつ漢字及びその種類。 
+  <LI>⑤ 見出し字については異体字関係の情報を表示していない。 
+  <LI>⑥ 連鎖を行わない字（異体字関係集合に含めない字）は灰色で示す。 
+  <LI>⑦ 見出し字に対して連鎖によって結び付けられた異体字はその距離を元に背景色の濃さが変化する。 
+  <LI>⑧ 見出し字に対してのみ列挙した特別な異体字は背景色をピンク色とする。 </LI></UL><BR>
+<H3><A name=8.>8. 異体字関係表</A></H3>
+<P>異体字関係表の内容一覧(関係表A及び関係表B)を，それぞれ<B>表8.1</B>及び<B>表8.2</B>に示す。 
+<P><B>備考</B> HTMLファイルについては，CSSの処理の都合上，Windows VistaにインストールしたMozilla 
+Firefoxブラウザが必要である。 </P>
+<P>
+<TABLE align=center border=1>
+  <CAPTION><B>表8.1 関係表A</B> </CAPTION>
+  <TBODY>
+  <TR>
+    <TH>見出し字
+    <TH>関係表A(PDF)
+    <TH>関係表A(HTML) 
+  <TR>
+    <TD>4E00～4EFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8101.pdf"><B>表8.1.1</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8101.htm"><B>表8.1.1</B>(H)</A> 
+
+  <TR>
+    <TD>4F00～4FFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8102.pdf"><B>表8.1.2</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8102.htm"><B>表8.1.2</B>(H)</A> 
+
+  <TR>
+    <TD>5000～50FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8103.pdf"><B>表8.1.3</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8103.htm"><B>表8.1.3</B>(H)</A> 
+
+  <TR>
+    <TD>5100～51FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8104.pdf"><B>表8.1.4</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8104.htm"><B>表8.1.4</B>(H)</A> 
+
+  <TR>
+    <TD>5200～52FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8105.pdf"><B>表8.1.5</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8105.htm"><B>表8.1.5</B>(H)</A> 
+
+  <TR>
+    <TD>5300～53FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8106.pdf"><B>表8.1.6</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8106.htm"><B>表8.1.6</B>(H)</A> 
+
+  <TR>
+    <TD>5400～54FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8107.pdf"><B>表8.1.7</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8107.htm"><B>表8.1.7</B>(H)</A> 
+
+  <TR>
+    <TD>5500～55FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8108.pdf"><B>表8.1.8</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8108.htm"><B>表8.1.8</B>(H)</A> 
+
+  <TR>
+    <TD>5600～56FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8109.pdf"><B>表8.1.9</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8109.htm"><B>表8.1.9</B>(H)</A> 
+
+  <TR>
+    <TD>5700～57FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8110.pdf"><B>表8.1.10</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8110.htm"><B>表8.1.10</B>(H)</A> 
+
+  <TR>
+    <TD>5800～58FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8111.pdf"><B>表8.1.11</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8111.htm"><B>表8.1.11</B>(H)</A> 
+
+  <TR>
+    <TD>5900～59FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8112.pdf"><B>表8.1.12</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8112.htm"><B>表8.1.12</B>(H)</A> 
+
+  <TR>
+    <TD>5A00～5AFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8113.pdf"><B>表8.1.13</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8113.htm"><B>表8.1.13</B>(H)</A> 
+
+  <TR>
+    <TD>5B00～5BFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8114.pdf"><B>表8.1.14</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8114.htm"><B>表8.1.14</B>(H)</A> 
+
+  <TR>
+    <TD>5C00～5CFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8115.pdf"><B>表8.1.15</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8115.htm"><B>表8.1.15</B>(H)</A> 
+
+  <TR>
+    <TD>5D00～5DFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8116.pdf"><B>表8.1.16</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8116.htm"><B>表8.1.16</B>(H)</A> 
+
+  <TR>
+    <TD>5E00～5EFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8117.pdf"><B>表8.1.17</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8117.htm"><B>表8.1.17</B>(H)</A> 
+
+  <TR>
+    <TD>5F00～5FFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8118.pdf"><B>表8.1.18</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8118.htm"><B>表8.1.18</B>(H)</A> 
+
+  <TR>
+    <TD>6000～60FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8119.pdf"><B>表8.1.19</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8119.htm"><B>表8.1.19</B>(H)</A> 
+
+  <TR>
+    <TD>6100～61FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8120.pdf"><B>表8.1.20</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8120.htm"><B>表8.1.20</B>(H)</A> 
+
+  <TR>
+    <TD>6200～62FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8121.pdf"><B>表8.1.21</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8121.htm"><B>表8.1.21</B>(H)</A> 
+
+  <TR>
+    <TD>6300～63FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8122.pdf"><B>表8.1.22</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8122.htm"><B>表8.1.22</B>(H)</A> 
+
+  <TR>
+    <TD>6400～64FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8123.pdf"><B>表8.1.23</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8123.htm"><B>表8.1.23</B>(H)</A> 
+
+  <TR>
+    <TD>6500～65FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8124.pdf"><B>表8.1.24</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8124.htm"><B>表8.1.24</B>(H)</A> 
+
+  <TR>
+    <TD>6600～66FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8125.pdf"><B>表8.1.25</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8125.htm"><B>表8.1.25</B>(H)</A> 
+
+  <TR>
+    <TD>6700～67FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8126.pdf"><B>表8.1.26</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8126.htm"><B>表8.1.26</B>(H)</A> 
+
+  <TR>
+    <TD>6800～68FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8127.pdf"><B>表8.1.27</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8127.htm"><B>表8.1.27</B>(H)</A> 
+
+  <TR>
+    <TD>6900～69FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8128.pdf"><B>表8.1.28</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8128.htm"><B>表8.1.28</B>(H)</A> 
+
+  <TR>
+    <TD>6A00～6AFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8129.pdf"><B>表8.1.29</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8129.htm"><B>表8.1.29</B>(H)</A> 
+
+  <TR>
+    <TD>6B00～6BFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8130.pdf"><B>表8.1.30</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8130.htm"><B>表8.1.30</B>(H)</A> 
+
+  <TR>
+    <TD>6C00～6CFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8131.pdf"><B>表8.1.31</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8131.htm"><B>表8.1.31</B>(H)</A> 
+
+  <TR>
+    <TD>6D00～6DFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8132.pdf"><B>表8.1.32</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8132.htm"><B>表8.1.32</B>(H)</A> 
+
+  <TR>
+    <TD>6E00～6EFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8133.pdf"><B>表8.1.33</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8133.htm"><B>表8.1.33</B>(H)</A> 
+
+  <TR>
+    <TD>6F00～6FFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8134.pdf"><B>表8.1.34</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8134.htm"><B>表8.1.34</B>(H)</A> 
+
+  <TR>
+    <TD>7000～70FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8135.pdf"><B>表8.1.35</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8135.htm"><B>表8.1.35</B>(H)</A> 
+
+  <TR>
+    <TD>7100～71FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8136.pdf"><B>表8.1.36</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8136.htm"><B>表8.1.36</B>(H)</A> 
+
+  <TR>
+    <TD>7200～72FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8137.pdf"><B>表8.1.37</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8137.htm"><B>表8.1.37</B>(H)</A> 
+
+  <TR>
+    <TD>7300～73FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8138.pdf"><B>表8.1.38</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8138.htm"><B>表8.1.38</B>(H)</A> 
+
+  <TR>
+    <TD>7400～74FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8139.pdf"><B>表8.1.39</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8139.htm"><B>表8.1.39</B>(H)</A> 
+
+  <TR>
+    <TD>7500～75FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8140.pdf"><B>表8.1.40</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8140.htm"><B>表8.1.40</B>(H)</A> 
+
+  <TR>
+    <TD>7600～76FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8141.pdf"><B>表8.1.41</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8141.htm"><B>表8.1.41</B>(H)</A> 
+
+  <TR>
+    <TD>7700～77FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8142.pdf"><B>表8.1.42</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8142.htm"><B>表8.1.42</B>(H)</A> 
+
+  <TR>
+    <TD>7800～78FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8143.pdf"><B>表8.1.43</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8143.htm"><B>表8.1.43</B>(H)</A> 
+
+  <TR>
+    <TD>7900～79FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8144.pdf"><B>表8.1.44</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8144.htm"><B>表8.1.44</B>(H)</A> 
+
+  <TR>
+    <TD>7A00～7AFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8145.pdf"><B>表8.1.45</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8145.htm"><B>表8.1.45</B>(H)</A> 
+
+  <TR>
+    <TD>7B00～7BFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8146.pdf"><B>表8.1.46</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8146.htm"><B>表8.1.46</B>(H)</A> 
+
+  <TR>
+    <TD>7C00～7CFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8147.pdf"><B>表8.1.47</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8147.htm"><B>表8.1.47</B>(H)</A> 
+
+  <TR>
+    <TD>7D00～7DFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8148.pdf"><B>表8.1.48</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8148.htm"><B>表8.1.48</B>(H)</A> 
+
+  <TR>
+    <TD>7E00～7EFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8149.pdf"><B>表8.1.49</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8149.htm"><B>表8.1.49</B>(H)</A> 
+
+  <TR>
+    <TD>7F00～7FFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8150.pdf"><B>表8.1.50</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8150.htm"><B>表8.1.50</B>(H)</A> 
+
+  <TR>
+    <TD>8000～80FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8151.pdf"><B>表8.1.51</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8151.htm"><B>表8.1.51</B>(H)</A> 
+
+  <TR>
+    <TD>8100～81FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8152.pdf"><B>表8.1.52</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8152.htm"><B>表8.1.52</B>(H)</A> 
+
+  <TR>
+    <TD>8200～82FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8153.pdf"><B>表8.1.53</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8153.htm"><B>表8.1.53</B>(H)</A> 
+
+  <TR>
+    <TD>8300～83FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8154.pdf"><B>表8.1.54</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8154.htm"><B>表8.1.54</B>(H)</A> 
+
+  <TR>
+    <TD>8400～84FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8155.pdf"><B>表8.1.55</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8155.htm"><B>表8.1.55</B>(H)</A> 
+
+  <TR>
+    <TD>8500～85FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8156.pdf"><B>表8.1.56</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8156.htm"><B>表8.1.56</B>(H)</A> 
+
+  <TR>
+    <TD>8600～86FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8157.pdf"><B>表8.1.57</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8157.htm"><B>表8.1.57</B>(H)</A> 
+
+  <TR>
+    <TD>8700～87FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8158.pdf"><B>表8.1.58</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8158.htm"><B>表8.1.58</B>(H)</A> 
+
+  <TR>
+    <TD>8800～88FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8159.pdf"><B>表8.1.59</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8159.htm"><B>表8.1.59</B>(H)</A> 
+
+  <TR>
+    <TD>8900～89FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8160.pdf"><B>表8.1.60</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8160.htm"><B>表8.1.60</B>(H)</A> 
+
+  <TR>
+    <TD>8A00～8AFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8161.pdf"><B>表8.1.61</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8161.htm"><B>表8.1.61</B>(H)</A> 
+
+  <TR>
+    <TD>8B00～8BFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8162.pdf"><B>表8.1.62</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8162.htm"><B>表8.1.62</B>(H)</A> 
+
+  <TR>
+    <TD>8C00～8CFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8163.pdf"><B>表8.1.63</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8163.htm"><B>表8.1.63</B>(H)</A> 
+
+  <TR>
+    <TD>8D00～8DFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8164.pdf"><B>表8.1.64</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8164.htm"><B>表8.1.64</B>(H)</A> 
+
+  <TR>
+    <TD>8E00～8EFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8165.pdf"><B>表8.1.65</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8165.htm"><B>表8.1.65</B>(H)</A> 
+
+  <TR>
+    <TD>8F00～8FFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8166.pdf"><B>表8.1.66</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8166.htm"><B>表8.1.66</B>(H)</A> 
+
+  <TR>
+    <TD>9000～90FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8167.pdf"><B>表8.1.67</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8167.htm"><B>表8.1.67</B>(H)</A> 
+
+  <TR>
+    <TD>9100～91FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8168.pdf"><B>表8.1.68</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8168.htm"><B>表8.1.68</B>(H)</A> 
+
+  <TR>
+    <TD>9200～92FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8169.pdf"><B>表8.1.69</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8169.htm"><B>表8.1.69</B>(H)</A> 
+
+  <TR>
+    <TD>9300～93FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8170.pdf"><B>表8.1.70</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8170.htm"><B>表8.1.70</B>(H)</A> 
+
+  <TR>
+    <TD>9400～94FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8171.pdf"><B>表8.1.71</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8171.htm"><B>表8.1.71</B>(H)</A> 
+
+  <TR>
+    <TD>9500～95FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8172.pdf"><B>表8.1.72</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8172.htm"><B>表8.1.72</B>(H)</A> 
+
+  <TR>
+    <TD>9600～96FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8173.pdf"><B>表8.1.73</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8173.htm"><B>表8.1.73</B>(H)</A> 
+
+  <TR>
+    <TD>9700～97FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8174.pdf"><B>表8.1.74</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8174.htm"><B>表8.1.74</B>(H)</A> 
+
+  <TR>
+    <TD>9800～98FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8175.pdf"><B>表8.1.75</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8175.htm"><B>表8.1.75</B>(H)</A> 
+
+  <TR>
+    <TD>9900～99FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8176.pdf"><B>表8.1.76</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8176.htm"><B>表8.1.76</B>(H)</A> 
+
+  <TR>
+    <TD>9A00～9AFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8177.pdf"><B>表8.1.77</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8177.htm"><B>表8.1.77</B>(H)</A> 
+
+  <TR>
+    <TD>9B00～9BFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8178.pdf"><B>表8.1.78</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8178.htm"><B>表8.1.78</B>(H)</A> 
+
+  <TR>
+    <TD>9C00～9CFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8179.pdf"><B>表8.1.79</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8179.htm"><B>表8.1.79</B>(H)</A> 
+
+  <TR>
+    <TD>9D00～9DFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8180.pdf"><B>表8.1.80</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8180.htm"><B>表8.1.80</B>(H)</A> 
+
+  <TR>
+    <TD>9E00～9EFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8181.pdf"><B>表8.1.81</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8181.htm"><B>表8.1.81</B>(H)</A> 
+
+  <TR>
+    <TD>9F00～9FA5
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8182.pdf"><B>表8.1.82</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8182.htm"><B>表8.1.82</B>(H)</A> 
+    </TD></TR></TBODY></TABLE></P>
+<P>
+<TABLE align=center border=1>
+  <CAPTION><B>表8.2 関係表B</B> </CAPTION>
+  <TBODY>
+  <TR>
+    <TH>見出し字
+    <TH>関係表B(PDF)
+    <TH>関係表B(HTML) 
+  <TR>
+    <TD>4E00～4EFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8201.pdf"><B>表8.2.1</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8201.htm"><B>表8.2.1</B>(H)</A> 
+
+  <TR>
+    <TD>4F00～4FFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8202.pdf"><B>表8.2.2</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8202.htm"><B>表8.2.2</B>(H)</A> 
+
+  <TR>
+    <TD>5000～50FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8203.pdf"><B>表8.2.3</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8203.htm"><B>表8.2.3</B>(H)</A> 
+
+  <TR>
+    <TD>5100～51FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8204.pdf"><B>表8.2.4</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8204.htm"><B>表8.2.4</B>(H)</A> 
+
+  <TR>
+    <TD>5200～52FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8205.pdf"><B>表8.2.5</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8205.htm"><B>表8.2.5</B>(H)</A> 
+
+  <TR>
+    <TD>5300～53FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8206.pdf"><B>表8.2.6</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8206.htm"><B>表8.2.6</B>(H)</A> 
+
+  <TR>
+    <TD>5400～54FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8207.pdf"><B>表8.2.7</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8207.htm"><B>表8.2.7</B>(H)</A> 
+
+  <TR>
+    <TD>5500～55FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8208.pdf"><B>表8.2.8</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8208.htm"><B>表8.2.8</B>(H)</A> 
+
+  <TR>
+    <TD>5600～56FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8209.pdf"><B>表8.2.9</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8209.htm"><B>表8.2.9</B>(H)</A> 
+
+  <TR>
+    <TD>5700～57FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8210.pdf"><B>表8.2.10</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8210.htm"><B>表8.2.10</B>(H)</A> 
+
+  <TR>
+    <TD>5800～58FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8211.pdf"><B>表8.2.11</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8211.htm"><B>表8.2.11</B>(H)</A> 
+
+  <TR>
+    <TD>5900～59FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8212.pdf"><B>表8.2.12</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8212.htm"><B>表8.2.12</B>(H)</A> 
+
+  <TR>
+    <TD>5A00～5AFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8213.pdf"><B>表8.2.13</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8213.htm"><B>表8.2.13</B>(H)</A> 
+
+  <TR>
+    <TD>5B00～5BFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8214.pdf"><B>表8.2.14</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8214.htm"><B>表8.2.14</B>(H)</A> 
+
+  <TR>
+    <TD>5C00～5CFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8215.pdf"><B>表8.2.15</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8215.htm"><B>表8.2.15</B>(H)</A> 
+
+  <TR>
+    <TD>5D00～5DFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8216.pdf"><B>表8.2.16</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8216.htm"><B>表8.2.16</B>(H)</A> 
+
+  <TR>
+    <TD>5E00～5EFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8217.pdf"><B>表8.2.17</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8217.htm"><B>表8.2.17</B>(H)</A> 
+
+  <TR>
+    <TD>5F00～5FFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8218.pdf"><B>表8.2.18</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8218.htm"><B>表8.2.18</B>(H)</A> 
+
+  <TR>
+    <TD>6000～60FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8219.pdf"><B>表8.2.19</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8219.htm"><B>表8.2.19</B>(H)</A> 
+
+  <TR>
+    <TD>6100～61FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8220.pdf"><B>表8.2.20</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8220.htm"><B>表8.2.20</B>(H)</A> 
+
+  <TR>
+    <TD>6200～62FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8221.pdf"><B>表8.2.21</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8221.htm"><B>表8.2.21</B>(H)</A> 
+
+  <TR>
+    <TD>6300～63FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8222.pdf"><B>表8.2.22</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8222.htm"><B>表8.2.22</B>(H)</A> 
+
+  <TR>
+    <TD>6400～64FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8223.pdf"><B>表8.2.23</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8223.htm"><B>表8.2.23</B>(H)</A> 
+
+  <TR>
+    <TD>6500～65FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8224.pdf"><B>表8.2.24</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8224.htm"><B>表8.2.24</B>(H)</A> 
+
+  <TR>
+    <TD>6600～66FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8225.pdf"><B>表8.2.25</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8225.htm"><B>表8.2.25</B>(H)</A> 
+
+  <TR>
+    <TD>6700～67FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8226.pdf"><B>表8.2.26</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8226.htm"><B>表8.2.26</B>(H)</A> 
+
+  <TR>
+    <TD>6800～68FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8227.pdf"><B>表8.2.27</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8227.htm"><B>表8.2.27</B>(H)</A> 
+
+  <TR>
+    <TD>6900～69FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8228.pdf"><B>表8.2.28</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8228.htm"><B>表8.2.28</B>(H)</A> 
+
+  <TR>
+    <TD>6A00～6AFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8229.pdf"><B>表8.2.29</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8229.htm"><B>表8.2.29</B>(H)</A> 
+
+  <TR>
+    <TD>6B00～6BFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8230.pdf"><B>表8.2.30</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8230.htm"><B>表8.2.30</B>(H)</A> 
+
+  <TR>
+    <TD>6C00～6CFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8231.pdf"><B>表8.2.31</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8231.htm"><B>表8.2.31</B>(H)</A> 
+
+  <TR>
+    <TD>6D00～6DFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8232.pdf"><B>表8.2.32</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8232.htm"><B>表8.2.32</B>(H)</A> 
+
+  <TR>
+    <TD>6E00～6EFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8233.pdf"><B>表8.2.33</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8233.htm"><B>表8.2.33</B>(H)</A> 
+
+  <TR>
+    <TD>6F00～6FFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8234.pdf"><B>表8.2.34</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8234.htm"><B>表8.2.34</B>(H)</A> 
+
+  <TR>
+    <TD>7000～70FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8235.pdf"><B>表8.2.35</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8235.htm"><B>表8.2.35</B>(H)</A> 
+
+  <TR>
+    <TD>7100～71FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8236.pdf"><B>表8.2.36</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8236.htm"><B>表8.2.36</B>(H)</A> 
+
+  <TR>
+    <TD>7200～72FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8237.pdf"><B>表8.2.37</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8237.htm"><B>表8.2.37</B>(H)</A> 
+
+  <TR>
+    <TD>7300～73FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8238.pdf"><B>表8.2.38</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8238.htm"><B>表8.2.38</B>(H)</A> 
+
+  <TR>
+    <TD>7400～74FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8239.pdf"><B>表8.2.39</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8239.htm"><B>表8.2.39</B>(H)</A> 
+
+  <TR>
+    <TD>7500～75FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8240.pdf"><B>表8.2.40</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8240.htm"><B>表8.2.40</B>(H)</A> 
+
+  <TR>
+    <TD>7600～76FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8241.pdf"><B>表8.2.41</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8241.htm"><B>表8.2.41</B>(H)</A> 
+
+  <TR>
+    <TD>7700～77FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8242.pdf"><B>表8.2.42</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8242.htm"><B>表8.2.42</B>(H)</A> 
+
+  <TR>
+    <TD>7800～78FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8243.pdf"><B>表8.2.43</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8243.htm"><B>表8.2.43</B>(H)</A> 
+
+  <TR>
+    <TD>7900～79FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8244.pdf"><B>表8.2.44</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8244.htm"><B>表8.2.44</B>(H)</A> 
+
+  <TR>
+    <TD>7A00～7AFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8245.pdf"><B>表8.2.45</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8245.htm"><B>表8.2.45</B>(H)</A> 
+
+  <TR>
+    <TD>7B00～7BFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8246.pdf"><B>表8.2.46</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8246.htm"><B>表8.2.46</B>(H)</A> 
+
+  <TR>
+    <TD>7C00～7CFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8247.pdf"><B>表8.2.47</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8247.htm"><B>表8.2.47</B>(H)</A> 
+
+  <TR>
+    <TD>7D00～7DFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8248.pdf"><B>表8.2.48</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8248.htm"><B>表8.2.48</B>(H)</A> 
+
+  <TR>
+    <TD>7E00～7EFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8249.pdf"><B>表8.2.49</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8249.htm"><B>表8.2.49</B>(H)</A> 
+
+  <TR>
+    <TD>7F00～7FFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8250.pdf"><B>表8.2.50</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8250.htm"><B>表8.2.50</B>(H)</A> 
+
+  <TR>
+    <TD>8000～80FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8251.pdf"><B>表8.2.51</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8251.htm"><B>表8.2.51</B>(H)</A> 
+
+  <TR>
+    <TD>8100～81FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8252.pdf"><B>表8.2.52</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8252.htm"><B>表8.2.52</B>(H)</A> 
+
+  <TR>
+    <TD>8200～82FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8253.pdf"><B>表8.2.53</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8253.htm"><B>表8.2.53</B>(H)</A> 
+
+  <TR>
+    <TD>8300～83FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8254.pdf"><B>表8.2.54</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8254.htm"><B>表8.2.54</B>(H)</A> 
+
+  <TR>
+    <TD>8400～84FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8255.pdf"><B>表8.2.55</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8255.htm"><B>表8.2.55</B>(H)</A> 
+
+  <TR>
+    <TD>8500～85FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8256.pdf"><B>表8.2.56</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8256.htm"><B>表8.2.56</B>(H)</A> 
+
+  <TR>
+    <TD>8600～86FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8257.pdf"><B>表8.2.57</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8257.htm"><B>表8.2.57</B>(H)</A> 
+
+  <TR>
+    <TD>8700～87FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8258.pdf"><B>表8.2.58</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8258.htm"><B>表8.2.58</B>(H)</A> 
+
+  <TR>
+    <TD>8800～88FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8259.pdf"><B>表8.2.59</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8259.htm"><B>表8.2.59</B>(H)</A> 
+
+  <TR>
+    <TD>8900～89FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8260.pdf"><B>表8.2.60</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8260.htm"><B>表8.2.60</B>(H)</A> 
+
+  <TR>
+    <TD>8A00～8AFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8261.pdf"><B>表8.2.61</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8261.htm"><B>表8.2.61</B>(H)</A> 
+
+  <TR>
+    <TD>8B00～8BFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8262.pdf"><B>表8.2.62</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8262.htm"><B>表8.2.62</B>(H)</A> 
+
+  <TR>
+    <TD>8C00～8CFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8263.pdf"><B>表8.2.63</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8263.htm"><B>表8.2.63</B>(H)</A> 
+
+  <TR>
+    <TD>8D00～8DFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8264.pdf"><B>表8.2.64</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8264.htm"><B>表8.2.64</B>(H)</A> 
+
+  <TR>
+    <TD>8E00～8EFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8265.pdf"><B>表8.2.65</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8265.htm"><B>表8.2.65</B>(H)</A> 
+
+  <TR>
+    <TD>8F00～8FFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8266.pdf"><B>表8.2.66</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8266.htm"><B>表8.2.66</B>(H)</A> 
+
+  <TR>
+    <TD>9000～90FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8267.pdf"><B>表8.2.67</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8267.htm"><B>表8.2.67</B>(H)</A> 
+
+  <TR>
+    <TD>9100～91FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8268.pdf"><B>表8.2.68</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8268.htm"><B>表8.2.68</B>(H)</A> 
+
+  <TR>
+    <TD>9200～92FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8269.pdf"><B>表8.2.69</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8269.htm"><B>表8.2.69</B>(H)</A> 
+
+  <TR>
+    <TD>9300～93FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8270.pdf"><B>表8.2.70</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8270.htm"><B>表8.2.70</B>(H)</A> 
+
+  <TR>
+    <TD>9400～94FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8271.pdf"><B>表8.2.71</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8271.htm"><B>表8.2.71</B>(H)</A> 
+
+  <TR>
+    <TD>9500～95FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8272.pdf"><B>表8.2.72</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8272.htm"><B>表8.2.72</B>(H)</A> 
+
+  <TR>
+    <TD>9600～96FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8273.pdf"><B>表8.2.73</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8273.htm"><B>表8.2.73</B>(H)</A> 
+
+  <TR>
+    <TD>9700～97FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8274.pdf"><B>表8.2.74</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8274.htm"><B>表8.2.74</B>(H)</A> 
+
+  <TR>
+    <TD>9800～98FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8275.pdf"><B>表8.2.75</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8275.htm"><B>表8.2.75</B>(H)</A> 
+
+  <TR>
+    <TD>9900～99FF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8276.pdf"><B>表8.2.76</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8276.htm"><B>表8.2.76</B>(H)</A> 
+
+  <TR>
+    <TD>9A00～9AFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8277.pdf"><B>表8.2.77</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8277.htm"><B>表8.2.77</B>(H)</A> 
+
+  <TR>
+    <TD>9B00～9BFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8278.pdf"><B>表8.2.78</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8278.htm"><B>表8.2.78</B>(H)</A> 
+
+  <TR>
+    <TD>9C00～9CFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8279.pdf"><B>表8.2.79</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8279.htm"><B>表8.2.79</B>(H)</A> 
+
+  <TR>
+    <TD>9D00～9DFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8280.pdf"><B>表8.2.80</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8280.htm"><B>表8.2.80</B>(H)</A> 
+
+  <TR>
+    <TD>9E00～9EFF
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8281.pdf"><B>表8.2.81</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8281.htm"><B>表8.2.81</B>(H)</A> 
+
+  <TR>
+    <TD>9F00～9FA5
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8282.pdf"><B>表8.2.82</B>(P)</A>
+    <TD><A 
+      href="http://www.itscj.ipsj.or.jp/ipsj-ts/ts0008/table/8282.htm"><B>表8.2.82</B>(H)</A> 
+    </TD></TR></TBODY></TABLE></P>
+<P><B>表8.2.N</B> (N=1～82)の中で用いられる異体字関係記号及びその意味を<B>表8.3</B>に示す。 </P>
+<P>
+<TABLE align=center border=1>
+  <CAPTION><B>表8.3 異体字関係記号</B> </CAPTION>
+  <TBODY>
+  <TR>
+    <TH>記号
+    <TH>意味 
+  <TR>
+    <TD>拡新&nbsp;
+    <TD><B>JIS X 0208</B>規格 1983年改正に伴う新旧字関係における新字 
+  <TR>
+    <TD>拡旧
+    <TD><B>JIS X 0208</B>規格 1983年改正に伴う新旧字関係における旧字 
+  <TR>
+    <TD>人別
+    <TD>人名用漢字同一字種関係における別字 
+  <TR>
+    <TD>常新
+    <TD>常用漢字新旧字関係における新字 
+  <TR>
+    <TD>常旧
+    <TD>常用漢字新旧字関係における旧字 
+  <TR>
+    <TD>規異
+    <TD>JIS国内規格参照異体字関係における異体字 
+  <TR>
+    <TD>同換
+    <TD>同音書き換え関係における書き換え後の字 
+  <TR>
+    <TD>同元
+    <TD>同音書き換え関係における書き換え前の字 
+  <TR>
+    <TD>ソセ
+    <TD><B>ISO/IEC 10646-1</B>原規格分離漢字関係における別符号位置 
+  <TR>
+    <TD>簡体
+    <TD>中国簡体字と繁体字関係における簡体字 
+  <TR>
+    <TD>繁体
+    <TD>中国簡体字と繁体字関係における繁体字 
+  <TR>
+    <TD>整異
+    <TD>第一批異体字整理表関係における異体字 
+  <TR>
+    <TD>整正
+    <TD>第一批異体字整理表関係における正字 
+  <TR>
+    <TD>数大
+    <TD>漢数字と大字関係における大字 
+  <TR>
+    <TD>数通
+    <TD>漢数字と大字関係における通常の漢数字 
+  <TR>
+    <TD>J互
+    <TD>CJK互換漢字 韓国KS互換関係における互換符号位置 
+  <TR>
+    <TD>J代
+    <TD>CJK互換漢字 韓国KS互換関係における標準符号位置 
+  <TR>
+    <TD>I互
+    <TD>CJK互換漢字 IBM拡張文字及びマイクロソフトWindows CP932互換関係における互換符号位置 
+  <TR>
+    <TD>I代
+    <TD>CJK互換漢字 IBM拡張文字及びマイクロソフトWindows CP932互換関係における標準符号位置 
+  <TR>
+    <TD>漢異
+    <TD>漢語大字典 異体字表関係における異体字 
+  <TR>
+    <TD>漢正
+    <TD>漢語大字典 異体字表関係における正字 
+  <TR>
+    <TD>通仮
+    <TD>漢語大字典 通仮字表関係における通仮字 
+  <TR>
+    <TD>通本
+    <TD>漢語大字典 通仮字表関係における本字 
+  <TR>
+    <TD>日中
+    <TD>日本と中国の常用字における異なり字形関係における日本で使用されている字 
+  <TR>
+    <TD>中日
+    <TD>日本と中国の常用字における異なり字形関係における中国で使用されている字 </TD></TR></TBODY></TABLE></P>
+<P><BR></P></FONT></BODY></HTML>

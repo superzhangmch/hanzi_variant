@@ -1,0 +1,9 @@
+REGEDIT4
+[HKEY_CURRENT_USER\Environment]
+"PHP_PEAR_SYSCONF_DIR"="C:\\Program Files\\php5"
+"PHP_PEAR_INSTALL_DIR"="C:\\Program Files\\php5\\pear"
+"PHP_PEAR_DOC_DIR"="C:\\Program Files\\php5\\pear\\docs"
+"PHP_PEAR_BIN_DIR"="C:\\Program Files\\php5"
+"PHP_PEAR_DATA_DIR"="C:\\Program Files\\php5\\pear\\data"
+"PHP_PEAR_PHP_BIN"="C:\\Program Files\\php5\\.\\php.exe"
+"PHP_PEAR_TEST_DIR"="C:\\Program Files\\php5\\pear\\tests"
